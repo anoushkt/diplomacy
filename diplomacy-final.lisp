@@ -1,60 +1,104 @@
-;; To report problems and to get help with issues,  please visit
-
-;;   https://github.com/portacle/portacle/issues
-;; Portacle is currently running SLIME , but you can
-;;   Switch to SLY
-;; You should also configure Portacle with the
-;;   First-time setup
-;;
-;; You can use this buffer for notes and tinkering with code.
 ;;; -*- Mode:Lisp -*-
-;;;Authors: Anoushka Tiwari
-(in-namespace "diplomacy")
-(new-context {diplomacy-type-games}
-             {games})
-(in-context {diplomacy-type-games})
+;;; Authors: Anoushka Tiwari
+;;; All spaces on the map are of the {diplomacy region} type.
+(new-type {diplomacy region} {thing})
+(new-complete-split-subtypes {diplomacy region}
+                             '({land region}
+                               {water region}
+                               {coastal region}))
+;;; A diplomacy region could allow armies, fleets, or both. This
+;;; depends on whether it is a land, water or coastal region.
+(new-type {army legal region}{diplomacy region} )
+(new-type {fleet legal region}{diplomacy region})
+(new-is-a {land region} {army legal region})
+(new-is-a {water region} {fleet legal region})
+(new-is-a {coastal region} {army legal region})
+(new-is-a {coastal region} {fleet legal region})
 
-;;;A {region} is any space on the board that can be occupied by a piece.
-(new-type {region}
-          {thing})
-;;; There are three major types of regions.
+;;; The type of unit that occupies a region.
+(new-indv {unit} {thing})
+(new-complete-split-subtypes {unit} '({army} {fleet} ))
 
-(new-complete-split-subtypes {region}
-                             '({land-region}
-                               {water-region}
-                               {coastal-region}
-                    (in-namespace "diplomacy")
-(new-context {diplomacy-type-games}
-             {games})
-(in-context {diplomacy-type-games})
+;;; Every valid region on the map is either a land, water
+;;; or coastal region.
+(new-indv {SYR} {land region})
+(new-indv {ARM} {coastal region})
+(new-indv {SMY} {coastal region})
+(new-indv {ANK} {coastal region})
+(new-indv {CON} {coastal region})
+(new-indv {SEV} {coastal region})
+(new-indv {UKR} {land region})
+(new-indv {WAR} {land region})
+(new-indv {MOS} {land region})
+(new-indv {LVN} {coastal region})
+(new-indv {STP} {coastal region})
+(new-indv {NAP} {coastal region})
+(new-indv {APU} {coastal region})
+(new-indv {ROM} {coastal region})
+(new-indv {TUS} {coastal region})
+(new-indv {VEN} {coastal region})
+(new-indv {PIE} {coastal region})
+(new-indv {MUN} {land region})
+(new-indv {SIL} {land region})
+(new-indv {PRU} {coastal region})
+(new-indv {BER} {coastal region})
+(new-indv {RUH} {land region})
+(new-indv {KIE} {coastal region})
+(new-indv {MAR} {coastal region})
+(new-indv {GAS} {coastal region})
+(new-indv {ALB} {coastal region})
+(new-indv {FIN} {coastal region})
+(new-indv {BUR} {land region})
+(new-indv {PAR} {land region})
+(new-indv {BRE} {coastal region})
+(new-indv {PIC} {coastal region})
+(new-indv {LON} {coastal region})
+(new-indv {YOR} {coastal region})
+(new-indv {LVP} {coastal region})
+(new-indv {WAL} {coastal region})
+(new-indv {EDI} {coastal region})
+(new-indv {BUD} {land region})
+(new-indv {GAL} {land region})
+(new-indv {TRI} {land region})
+(new-indv {VIE} {land region})
+(new-indv {BOH} {land region})
+(new-indv {TYR} {land region})
+(new-indv {GRE} {coastal region})
+(new-indv {BUL} {coastal region})
+(new-indv {SWE} {coastal region})
+(new-indv {DEN} {coastal region})
+(new-indv {HOL} {coastal region})
+(new-indv {BEL} {coastal region})
+(new-indv {TUN} {coastal region})
+(new-indv {NAF} {coastal region})
+(new-indv {SPA} {coastal region})
+(new-indv {POR} {coastal region})
+(new-indv {NRA} {coastal region})
+(new-indv {BAR} {water region})
+(new-indv {SER} {land region})
+(new-indv {NRG} {water region})
+(new-indv {BOT} {water region})
+(new-indv {BAL} {water region})
+(new-indv {SKA} {water region})
+(new-indv {NTH} {water region})
+(new-indv {HEL} {water region})
+(new-indv {ENG} {water region})
+(new-indv {NAT} {water region})
+(new-indv {IRI} {water region})
+(new-indv {MID} {water region})
+(new-indv {WES} {water region})
+(new-indv {GOL} {water region})
+(new-indv {TYN} {water region})
+(new-indv {ION} {water region})
+(new-indv {ADR} {water region})
+(new-indv {AEG} {water region})
+(new-indv {BLA} {water region})
+(new-indv {EAS} {water region})
+(new-indv {NWY} {coastal region})
+(new-indv {RUM} {coastal region})
 
-;;;A {region} is any space on the board that can be occupied by a piece.
-(new-type {region}
-          {thing})
-;;; There are three major types of regions.
 
-(new-complete-split-subtypes {region}
-                             '({land-region}
-                               {water-region}
-                               {coastal-region}
-                               ))
-           ))
-;;;A unit can be an army or a fleet
-(new-type {unit} {thing})
-(new-complete-split-subtypes {unit} '({army} {fleet})
-;;; An army can go to a land or a coastal region.
-;;; A fleet can go to a coastal or a water region.
-(new-split-subtypes {legal units} '({armies only} {fleets only} {armies and fleets}))
-(new-is-a {land-region} {armies only})
-(new-is-a {water-region} {fleets only})
-(new-is-a {coastal-region} {armies and fleets})
-
-
-
-;;; The following are features of the standard version of Diplomacy.
-
-;;; There are 7 countries in the game.
-;;; Each country is an 'individual' of the {great power} type.
+;;; Each diplomacy player is assigned a great power.
 (new-type {great power} {thing})
 (new-indv {Austria} {great power})
 (new-indv {England} {great power})
@@ -63,345 +107,717 @@
 (new-indv {Italy} {great power})
 (new-indv {Russia} {great power})
 (new-indv {Turkey} {great power})
+(new-indv {NONE} {great power})
 
-;;; A list of all playing countries is maintained for ease of iteration.
-(defvar *countries* '(list {Austria} {England}
-                      {France} {Germany}
-                      {Italy} {Russia} {Turkey}))
-;;; Each country is assigned a colored playing piece.
-;;; Piece colors derive from a standard {color} type.
-(new-type {color} {thing})
-(new-split-subtypes {color} '({red} {dark blue} {light blue}
-                              {black} {green} {white} {yellow}))
+;;; A {supply center} is a special diplomacy region. Only some
+;;; regions are supply centers and can be used for maintaining
+;;; armies and fleets.
+(new-type {supply center} {diplomacy region})
+(new-is-a {ROM} {supply center})
+(new-is-a {BUL} {supply center})
+(new-is-a {SER} {supply center})
+(new-is-a {DEN} {supply center})
+(new-is-a {SWE} {supply center})
+(new-is-a {NWY} {supply center})
+(new-is-a {POR} {supply center})
+(new-is-a {SPA} {supply center})
+(new-is-a {POR} {supply center})
+(new-is-a {TUN} {supply center})
+(new-is-a {HOL} {supply center})
+(new-is-a {BEL} {supply center})
+(new-is-a {BER} {supply center})
+(new-is-a {KIE} {supply center})
+(new-is-a {MUN} {supply center})
+(new-is-a {ANK} {supply center})
+(new-is-a {CON} {supply center})
+(new-is-a {SMY} {supply center})
+(new-is-a {EDI} {supply center})
+(new-is-a {LVP} {supply center})
+(new-is-a {LON} {supply center})
+(new-is-a {BUD} {supply center})
+(new-is-a {TRI} {supply center})
+(new-is-a {VIE} {supply center})
+(new-is-a {MOS} {supply center})
+(new-is-a {STP} {supply center})
+(new-is-a {SEV} {supply center})
+(new-is-a {WAR} {supply center})
+(new-is-a {NAP} {supply center})
+(new-is-a {RUM} {supply center})
+(new-is-a {VEN} {supply center})
+(new-is-a  {BRE} {supply center})
+(new-is-a {PAR} {supply center})
+(new-is-a  {MAR} {supply center})
 
-(new-indv-role {piece color} {great power} {color})
+;;; A move is geographically possible between two regions only
+;;; if they are adjacent.
+;;; However, armies may be convoyed between two non-adjacent
+;;; land regions by fleets.
+(new-relation {adjacent to} :a-inst-of {diplomacy region}
+              :b-inst-of {diplomacy region} :symmetric t)
+(new-statement {SYR} {adjacent to} {ARM})
+(new-statement {SYR} {adjacent to} {SMY})
+(new-statement {ANK} {adjacent to} {ARM})
+(new-statement {ARM} {adjacent to} {SMY})
+(new-statement {ARM} {adjacent to} {SEV})
+(new-statement {ARM} {adjacent to} {BLA})
+(new-statement {SMY} {adjacent to} {CON})
+(new-statement {SMY} {adjacent to} {ANK})
+(new-statement {SMY} {adjacent to} {ARM})
+(new-statement {SMY} {adjacent to} {AEG})
+(new-statement {ANK} {adjacent to} {CON})
+(new-statement {ANK} {adjacent to} {BLA})
+(new-statement {CON} {adjacent to} {AEG})
+(new-statement {CON} {adjacent to} {BLA})
+(new-statement {SEV} {adjacent to} {BLA})
+(new-statement {SEV} {adjacent to} {MOS})
+(new-statement {SEV} {adjacent to} {RUM})
+(new-statement {UKR} {adjacent to} {GAL})
+(new-statement {UKR} {adjacent to} {MOS})
+(new-statement {UKR} {adjacent to} {WAR})
+(new-statement {UKR} {adjacent to} {RUM})
+(new-statement {WAR} {adjacent to} {GAL})
+(new-statement {WAR} {adjacent to} {MOS})
+(new-statement {WAR} {adjacent to} {PRU})
+(new-statement {WAR} {adjacent to} {SIL})
+(new-statement {WAR} {adjacent to} {LVN})
+(new-statement {NAF} {adjacent to} {TUN})
+(new-statement {MOS} {adjacent to} {LVN})
+(new-statement {MOS} {adjacent to} {STP})
+(new-statement {LVN} {adjacent to} {BAL})
+(new-statement {LVN} {adjacent to} {STP})
+(new-statement {LVN} {adjacent to} {PRU})
+(new-statement {STP} {adjacent to} {BOT})
+(new-statement {NAP} {adjacent to} {APU})
+(new-statement {NAP} {adjacent to} {ROM})
+(new-statement {NAP} {adjacent to} {TYN})
+(new-statement {APU} {adjacent to} {ROM})
+(new-statement {APU} {adjacent to} {ADR})
+(new-statement {ROM} {adjacent to} {ADR})
+(new-statement {TUS} {adjacent to} {ROM})
+(new-statement {ROM} {adjacent to} {TYN})
+(new-statement {TUS} {adjacent to} {TYN})
+(new-statement {TUS} {adjacent to} {GOL})
+(new-statement {TUS} {adjacent to} {VEN})
+(new-statement {TUS} {adjacent to} {PIE})
+(new-statement {VEN} {adjacent to} {ADR})
+(new-statement {VEN} {adjacent to} {PIE})
+(new-statement {VEN} {adjacent to} {TYR})
+(new-statement {VEN} {adjacent to} {TRI})
+(new-statement {PIE} {adjacent to} {MAR})
+(new-statement {PIE} {adjacent to} {GOL})
+(new-statement {PIE} {adjacent to} {TYR})
+(new-statement {MUN} {adjacent to} {BUR})
+(new-statement {MUN} {adjacent to} {BOH})
+(new-statement {MUN} {adjacent to} {TYR})
+(new-statement {MUN} {adjacent to} {RUH})
+(new-statement {MUN} {adjacent to} {KIE})
+(new-statement {MUN} {adjacent to} {SIL})
+(new-statement {MUN} {adjacent to} {BER})
+(new-statement {SIL} {adjacent to} {PRU})
+(new-statement {SIL} {adjacent to} {WAR})
+(new-statement {SIL} {adjacent to} {BER})
+(new-statement {SIL} {adjacent to} {BOH})
+(new-statement {PRU} {adjacent to} {BAL})
+(new-statement {PRU} {adjacent to} {BER})
+(new-statement {PRU} {adjacent to} {LVN})
+(new-statement {BER} {adjacent to} {KIE})
+(new-statement {BER} {adjacent to} {BAL})
+(new-statement {RUH} {adjacent to} {KIE})
+(new-statement {RUH} {adjacent to} {BEL})
+(new-statement {RUH} {adjacent to} {HOL})
+(new-statement {RUH} {adjacent to} {BUR})
+(new-statement {KIE} {adjacent to} {SIL})
+(new-statement {KIE} {adjacent to} {DEN})
+(new-statement {KIE} {adjacent to} {HOL})
+(new-statement {KIE} {adjacent to} {BAL})
+(new-statement {MAR} {adjacent to} {PIE})
+(new-statement {MAR} {adjacent to} {BUR})
+(new-statement {MAR} {adjacent to} {GAS})
+(new-statement {MAR} {adjacent to} {GOL})
+(new-statement {MAR} {adjacent to} {SPA})
+(new-statement {BUR} {adjacent to} {PAR})
+(new-statement {PAR} {adjacent to} {PIC})
+(new-statement {PAR} {adjacent to} {GAS})
+(new-statement {PAR} {adjacent to} {BRE})
+(new-statement {BRE} {adjacent to} {GAS})
+(new-statement {BRE} {adjacent to} {PIC})
+(new-statement {BRE} {adjacent to} {ENG})
+(new-statement {PIC} {adjacent to} {BEL})
+(new-statement {PIC} {adjacent to} {BUR})
+(new-statement {PIC} {adjacent to} {ENG})
+(new-statement {LON} {adjacent to} {WAL})
+(new-statement {LON} {adjacent to} {YOR})
+(new-statement {LON} {adjacent to} {LVP})
+(new-statement {LON} {adjacent to} {ENG})
+(new-statement {YOR} {adjacent to} {LVP})
+(new-statement {YOR} {adjacent to} {NTH})
+(new-statement {YOR} {adjacent to} {WAL})
+(new-statement {YOR} {adjacent to} {EDI})
+(new-statement {LVP} {adjacent to} {WAL})
+(new-statement {LVP} {adjacent to} {EDI})
+(new-statement {LVP} {adjacent to} {IRI})
+(new-statement {WAL} {adjacent to} {IRI})
+(new-statement {WAL} {adjacent to} {ENG})
+(new-statement {EDI} {adjacent to} {NRG})
+(new-statement {EDI} {adjacent to} {NTH})
+(new-statement {EDI} {adjacent to} {NAT})
+(new-statement {BUD} {adjacent to} {VIE})
+(new-statement {BUD} {adjacent to} {GAL})
+(new-statement {BUD} {adjacent to} {TRI})
+(new-statement {BUD} {adjacent to} {SER})
+(new-statement {BUD} {adjacent to} {RUM})
+(new-statement {GAL} {adjacent to} {BOH})
+(new-statement {GAL} {adjacent to} {VIE})
+(new-statement {TRI} {adjacent to} {VIE})
+(new-statement {TRI} {adjacent to} {TYR})
+(new-statement {TRI} {adjacent to} {ADR})
+(new-statement {VIE} {adjacent to} {BOH})
+(new-statement {VIE} {adjacent to} {TYR})
+(new-statement {BOH} {adjacent to} {TYR})
+(new-statement {GRE} {adjacent to} {SER})
+(new-statement {GRE} {adjacent to} {BUL})
+(new-statement {GRE} {adjacent to} {AEG})
+(new-statement {BUL} {adjacent to} {BLA})
+(new-statement {BUL} {adjacent to} {RUM})
+(new-statement {BUL} {adjacent to} {SER})
+(new-statement {BUL} {adjacent to} {GRE})
+(new-statement {BUL} {adjacent to} {AEG})
+(new-statement {BUL} {adjacent to} {CON})
+(new-statement {SER} {adjacent to} {BUD})
+(new-statement {SER} {adjacent to} {ALB})
+(new-statement {SER} {adjacent to} {GRE})
+(new-statement {SER} {adjacent to} {BUL})
+(new-statement {SER} {adjacent to} {RUM})
+(new-statement {ALB} {adjacent to} {ADR})
+(new-statement {ALB} {adjacent to} {GRE})
+(new-statement {FIN} {adjacent to} {BOT})
+(new-statement {SWE} {adjacent to} {BOT})
+(new-statement {SWE} {adjacent to} {BAL})
+(new-statement {DEN} {adjacent to} {BAL})
+(new-statement {DEN} {adjacent to} {NTH})
+(new-statement {HOL} {adjacent to} {KIE})
+(new-statement {HOL} {adjacent to} {BEL})
+(new-statement {HOL} {adjacent to} {RUH})
+(new-statement {HOL} {adjacent to} {NTH})
+(new-statement {BEL} {adjacent to} {ENG})
+(new-statement {BEL} {adjacent to} {RUH})
+(new-statement {BEL} {adjacent to} {PIC})
+(new-statement {SPA} {adjacent to} {GOL})
+(new-statement {SPA} {adjacent to} {MID})
+(new-statement {SPA} {adjacent to} {GAS})
+(new-statement {SPA} {adjacent to} {POR})
+(new-statement {POR} {adjacent to} {MID})
+(new-statement {WES} {adjacent to} {NAF})
+(new-statement {WES} {adjacent to} {TUN})
+(new-statement {TYN} {adjacent to} {TUN})
 
-;;; Each {great power} is assigned a {piece color}.
+;;; The {occupying unit} of a {diplomacy region}
+;;; tells us whether the region is occupied by an army
+;;; or a fleet.
+;;; A land region can only be occupied by an army.
+;;; A water region can only be occupied by a fleet.
+;;; A coastal region can be occupied by an army or a fleet.
 
-(x-is-the-y-of-z {red} {piece color} {Austria})
-(x-is-the-y-of-z {dark blue} {piece color} {England})
-(x-is-the-y-of-z {light blue} {piece color} {France})
-(x-is-the-y-of-z {black} {piece color} {Germany})
-(x-is-the-y-of-z {green} {piece color} {Italy})
-(x-is-the-y-of-z {white} {piece color} {Russia})
-(x-is-the-y-of- {yellow} {piece color} {Turkey})
+(new-indv-role {occupying unit} {diplomacy region} {unit})
 
-;;; The {supply center} type is defined.
-(new-type {supply center} {thing})
+;;; This is the great power that owns the unit in the region.
+(new-indv-role {occupying great power} {diplomacy region} {great power})
 
-;;; A supply center is a city that may or may not be a home base.
-;;; Cities up till Belgium are not home bases.
-
-(new-complete-split-subtypes
- {supply center}
- '({Rumania} {Bulgaria} {Serbia}
-   {Denmark} {Sweden} {Norway}
-   {Portugal} {Spain} {Tunis}
-   {Holland} {Belgium} {Berlin}
-   {Kiel} {Munich} {Ankara}
-   {Constantinople} {Smyrna}
-   {Edinburgh} {Liverpool}
-   {London} {Budapest}
-   {Trieste} {Vienna}
-   {Moscow} {Saint Petersburgh}
-   {Sevastopol} {Warsaw}
-   {Naples} {Rome}
-   {Venice} {Brest} 
-   {Marseilles} {Paris}))
-
-;;; A supply center may or may not be a home base.
-;;; If X is a supply center of Y, we create a {home-base-of} relationship
-;;; between X and Y.
-
-(new-relation {home-base-of} {supply center} {great power})
-(new-statement {Berlin} {home-base-of} {Germany})
-(new-statement {Kiel}  {home-base-of} {Germany})
-(new-statement {Munich} {home-base-of} {Germany})
-(new-statement {Ankara} {home-base-of} {Turkey})
-(new-statement {Constantinople} {home-base-of} {Turkey})
-(new-statement {Smyrna} {home-base-of} {Turkey})
-(new-statement {Edinburgh} {home-base-of} {England})
-(new-statement {Liverpool} {home-base-of} {England})
-(new-statement {London} {home-base-of} {England})
-(new-statement {Budapest} {home-base-of} {Austria})
-(new-statement {Trieste} {home-base-of} {Austria})
-(new-statement {Vienna} {home-base-of} {Austria})
-(new-statement {Moscow} {home-base-of} {Russia})
-(new-statement {Saint Petersburgh} {home-base-of} {Russia})
-(new-statement {Sevastopol} {home-base-of} {Russia})
-(new-statement {Warsaw} {home-base-of} {Russia})
-(new-statement {Naples} {home-base-of} {Italy})
-(new-statement {Rome} {home-base-of} {Italy})
-(new-statement {Venice} {home-base-of} {Italy})
-(new-statement {Brest} {home-base-of} {France})
-(new-statement {Marseilles} {home-base-of} {France})
-(new-statement {Paris} {home-base-of} {France})
-
-;;; Land regions that are also supply centers have armies.
-;;; Water regions have fleets.
-(new-is-a {Vienna} {land-region})
-(new-is-a {Budapest} {land-region})
-(new-is-a {Trieste} {water-region})
-(new-is-a {London} {water-region})
-(new-is-a {Edinburgh} {water-region})
-(new-is-a {Liverpool} {land-region})
-(new-is-a {Paris} {land-region})
-(new-is-a {Marseilles} {land-region})
-(new-is-a {Brest} {water-region})
-(new-is-a {Berlin} {land-region})
-(new-is-a {Munich} {land-region})
-(new-is-a {Kiel} {water-region})
-(new-is-a {Rome} {land-region})
-(new-is-a {Venice} {land-region})
-(new-is-a {Naples} {water-region})
-(new-is-a {Moscow} {land-region})
-(new-is-a {Sevastopol} {water-region})
-(new-is-a {Ankara} {water-region})
-(new-is-a {Constantinople} {land-region})
-(new-is-a {Smyrna} {land-region})
-(new-is-a {supply center} {unit city})
-
-;;; All regions have an associated variable that contains information about the situation there.
-(defparameter *Syria* (list))
-(defparameter *Armenia* (list))
-(defparameter *Smyrna* (list))
-(defparameter *Ankara* (list))
-(defparameter *Constantinople* (list))
-(defparameter *Sevastopol* (list))
-(defparameter *Ukraine* (list))
-(defparameter *Warsaw* (list))
-(defparameter *Moscow* (list))
-(defparameter *Livonia* (list))
-(defparameter *St-Petersburg* (list))
-(defparameter *Naples* (list))
-(defparameter *Apulia* (list))
-(defparameter *Rome* (list))
-(defparameter *Tuscany* (list))
-(defparameter *Venice* (list))
-(defparameter *Piedmont* (list) )
-(defparameter *Munich* (list))
-(defparameter *Silesia* (list))
-(defparameter *Prussia* (list))
-(defparameter *Berlin* (list))
-(defparameter *Ruhr* (list))
-(defparameter *Kiel* (list))
-(defparameter *Marseilles* (list))
-(defparameter *Gascony* (list))
-(defparameter *Burgundy* (list))
-(defparameter *Paris* (list))
-(defparameter *Brest* (list))
-(defparameter *Picardy* (list))
-(defparameter *London* (list))
-(defparameter *Yorkshire* (list))
-(defparameter *Liverpool* (list))
-(defparameter *Edinburgh* (list))
-(defparameter *Clyde* (list))
-(defparameter *Wales* (list))
-(defparameter *Budapest* (list))
-(defparameter *Galicia* (list))
-(defparameter *Trieste* (list))
-(defparameter *Vienna* (list))
-(defparameter *Bohemia* (list))
-(defparameter *Tyrolia* (list))
-(defparameter *Greece* (list))
-(defparameter *Bulgaria* (list))
-(defparameter *Serbia* (list))
-(defparameter *Albania* (list))
-(defparameter *Rumania* (list))
-(defparameter *Finland* (list))
-(defparameter *Sweden* (list))
-(defparameter *Denmark* (list))
-(defparameter *Holland*(list))
-(defparameter *Belgium* (list))
-(defparameter *Spain* (list))
-(defparameter *Portugal* (list))
-(defparameter *North-Africa* (list))
-(defparameter *Tunis* (list))
-(defparameter *Barents-Sea* (list))
-(defparameter *Norwegian-Sea* (list))
-(defparameter *Gulf-of-Bothnia* (list))
-(defparameter *Baltic-Sea* (list))
-(defparameter *Skagerrak* (list))
-(defparameter *North-Sea* (list))
-(defparameter *Helgoland-Bight* (list))
-(defparameter *English-Channel* (list))
-(defparameter *North-Atlantic-Ocean* (list))
-(defparameter *Irish-Sea* (list))
-(defparameter *Mid-Atlantic-Ocean* (list))
-(defparameter *Western-Mediterranean*(list))
-(defparameter *Gulf-of-Lyon*(list))
-(defparameter *Tyrrhenian-Sea* (list))
-(defparameter *Ionian-Sea* (list))
-(defparameter *Adriatic-Sea* (list))
-(defparameter *Eastern-Mediterranean* (list))
-(defparameter *Black-Sea* (list))
-(defparameter *Aegean-Sea* (list))
-
-
-
-;;; Any diplomacy region is a unit 'city'.
-(new-is-a {unit city} {thing})
-(new-type-role {owner} {unit city} {great power})
-(new-is-a {supply center} {unit city})
-
-
-;;; Now we implement the geographical structure
-;;; of the map.
-
-(defparameter *g-Syria* (list {Armenia} {Smyrna}))
-(defparameter *g-Armenia* (list {Ankara} {Smyrna} {Syria} {Sevastopol} 
-                           {Black-Sea}))
-(defparameter *g-Smyrna* (list {Ankara} {Constantinople}
-                         {Armenia} {Aegean-Sea}))
-(defparameter *g-Ankara* (list {Constantinople} {Smyrna}
-                         {Armenia} {Black-Sea}))
-(defparameter *g-Constantinople* (list {Bulgaria} {Ankara}
-                                 {Smyrna} {Aegean-Sea} {Black-Sea}))
-(defparameter *g-Sevastopol* (list {Black-sea} 
-                             {Moscow} {Rumania}))
-(defparameter *g-Ukraine* (list {Galicia} 
-                          {Moscow} {Warsaw} {Sevastopol} {Rumania}))
-(defparameter *g-Warsaw* (list {Galicia} {Moscow} {Prussia}
-                          {Silesia} {Ukraine} {Livonia}))
-(defparameter *g-Moscow* (list  {Livonia} {Ukraine} {Warsaw} {Sevastopol}
-                          {St-Petersburg}))
-(defparameter *g-Livonia* (list {Moscow} {Warsaw} {Baltic-Sea} 
-                          {St-Petersburg} {Prussia} ))
-(defparameter *g-St-Petersburg* (list {Gulf-of-Bothnia}
-                                {Moscow} {Livonia}))
-(defparameter *g-Naples* (list {Apulia} {Rome} {Tyrrhenian-Sea}))
-(defparameter *g-Apulia* (list {Rome} {Naples} {Adriatic-Sea}))
-(defparameter *g-Rome* (list {Apulia} {Naples} {Tuscany} {Tyrrhenian-Sea}))
-(defparameter *g-Tuscany* (list {Rome} {Tyrrhenian-Sea} {Gulf-of-Lyon}
-                           {Venice} {Piedmont}))
-(defparameter *g-Venice* (list {Adriatic-Sea} {Piedmont} {Tyrolia} {Trieste} ))
-(defparameter *g-Piedmont* (list {Marseilles} {Venice} {Gulf-of-Lyon} {Tuscany} {Tyrolia}) )
-(defparameter *g-Munich* (list {Burgundy} {Bohemia} {Tyrolia} {Ruhr}
-                           {Kiel} {Silesia} {Berlin}))
-(defparameter *g-Silesia* (list {Prussia} {Warsaw} {Berlin} {Munich} {Bohemia}))
-(defparameter *g-Prussia* (list {Silesia} {Warsaw} {Baltic-Sea} {Berlin} {Livonia}))
-(defparameter *g-Berlin* (list {Kiel} {Baltic-Sea} {Prussia} {Silesia} {Munich}))
-(defparameter *g-Ruhr* (list {Kiel} {Munich} {Belgium} {Holland} {Burgundy}))
-(defparameter *g-Kiel* (list {Berlin} {Silesia} {Ruhr} {Denmark} 
-{Munich} {Holland} {Baltic-Sea}))
-(defparameter *g-Marseilles* (list {Piedmont} {Burgundy} {Gascony} {Gulf-of-Lyon}
-                                    {Spain}))
-(defparameter *g-Gascony* (list {Spain} {Marseilles} {Burgundy} {Paris} {Brest}
-                           {Mid-Atlantic-Ocean}))
-(defparameter *g-Burgundy* (list {Paris} {Marseilles}
-                                {Gascony} {Munich} {Picardy} {Ruhr} {Piedmont} {Belgium} ))
-(defparameter *g-Paris* (list {Picardy} {Burgundy} {Gascony} {Brest}))
-(defparameter *g-Brest* (list {Gascony} {Paris} {Picardy} {English-Channel}))
-(defparameter *g-Picardy* (list {Paris} {Belgium} {Burgundy} {Brest} {English-Channel}))
-(defparameter *g-London* (list {Wales} {Yorkshire} {Liverpool} {English-Channel} ))
-(defparameter *g-Yorkshire* (list {London} {Liverpool} {North-Sea} {Wales} {Edinburgh}))
-(defparameter *g-Liverpool* (list {Yorkshire} {Wales} {London} {Irish-Sea} {Edinburgh}))
-(defparameter *g-Wales* (list {Yorkshire} {London} {Liverpool} {Irish-Sea} {English-Channel}))
-(defparameter *g-Edinburgh* (list {Yorkshire} {Liverpool}
-                     {Norwegian-Sea} {North-Sea} {North-Atlantic-Ocean}))
-(defparameter *g-Clyde* (list))
-(defparameter *g-Budapest* (list {Vienna} {Galicia} {Trieste} 
-                           {Serbia} {Rumania}))
-(defparameter *g-Galicia* (list {Warsaw} {Ukraine} {Silesia} {Bohemia} {Vienna} {Budapest}))
-(defparameter *g-Trieste* (list {Budapest} {Vienna} {Tyrolia} {Adriatic Sea} {Venice}))
-(defparameter *g-Vienna* (list {Budapest} {Bohemia} {Galicia} {Tyrolia} {Trieste}))
-(defparameter *g-Bohemia* (list {Munich} {Silesia} {Galicia} {Vienna} {Tyrolia}))
-(defparameter *g-Tyrolia* (list {Vienna} {Bohemia} {Munich} {Piedmont} {Venice} {Trieste}))
-(defparameter *g-Greece* (list {Albania} {Serbia} {Bulgaria} {Aegean-Sea} ))
-(defparameter *g-Bulgaria* (list {Black-Sea} {Rumania} {Serbia} {Greece} {Aegean-Sea}
-                                 {Constantinople}))
-(defparameter *g-Serbia* (list {Budapest} {Trieste} {Albania} {Greece} {Bulgraria} {Rumania}))
-(defparameter *g-Albania* (list {Serbia} {Adriatic-Sea} {Trieste} {Greece} ))
-(defparameter *g-Rumania* (list {Ukraine} {Galicia} {Budapest} {Serbia} {Bulgaria} {Black-Sea}))
-(defparameter *g-Finland* (list {Gulf-of-Bothnia} {St-Petersburg} ))
-
-;;;Norway??????
-
-(defparameter *g-Sweden* (list {Gulf-of-Bothnia} {Baltic-Sea}))
-(defparameter *g-Denmark* (list {North-Sea} {Baltic-Sea}))
-(defparameter *g-Holland*(list {Kiel} {Belgium} {Ruhr} {North-Sea}))
-(defparameter *g-Belgium* (list {Holland} {English-Channel} {Ruhr} {Picardy} {London}))
-(defparameter *g-Spain* (list {Gulf-of-Lyon} {Mid-Atlantic-Ocean} {Gascony} {Marseilles}
-                          {Portugal}))
-(defparameter *g-Portugal* (list {Spain} {Mid-Atlantic-Ocean}))
-(defparameter *g-North-Africa* (list {Tyrrhenian-Sea} {Spain} {Western-Mediterranean}))
-(defparameter *g-Tunis* (list))
-
-(defparameter *g-Barents-Sea* (list))
-(defparameter *g-Norwegian-Sea* (list))
-(defparameter *g-Gulf-of-Bothnia* (list))
-(defparameter *g-Baltic-Sea* (list))
-(defparameter *g-Skagerrak* (list))
-(defparameter *g-North-Sea* (list))
-(defparameter *g-Helgoland-Bight* (list))
-(defparameter *g-English-Channel* (list))
-(defparameter *g-North-Atlantic-Ocean* (list))
-(defparameter *g-Irish-Sea* (list))
-(defparameter *g-Mid-Atlantic-Ocean* (list))
-(defparameter *g-Western-Mediterranean*(list))
-(defparameter *g-Gulf-of-Lyon*(list))
-(defparameter *g-Tyrrhenian-Sea* (list))
-(defparameter *g-Ionian-Sea* (list))
-(defparameter *g-Adriatic-Sea* (list))
-(defparameter *g-Eastern-Mediterranean* (list))
-(defparameter *g-Black-Sea* (list))
-(defparameter *g-Aegean-Sea* (list))
+;;; The {current owner} of a {supply center} is the {great power}
+;;; that owns it. It is not necessary that an army or fleet of the
+;;; currently occupies the region
+;;; A center may be occupied by another power without transfer
+;;; of ownership during certain phases of the game.
+(new-indv-role {current owner} {supply center} {great power})
 
 
+;;; Initialising supply centers.
+(x-is-the-y-of-z {Germany} {current owner} {BER})
+(x-is-the-y-of-z {Germany} {occupying great power} {BER})
+(x-is-the-y-of-z {army} {occupying unit} {BER})
+
+(x-is-the-y-of-z {Germany} {current owner} {KIE})
+(x-is-the-y-of-z {Germany} {occupying great power} {KIE})
+(x-is-the-y-of-z {fleet} {occupying unit} {KIE})
+
+(x-is-the-y-of-z {Germany} {current owner} {MUN})
+(x-is-the-y-of-z {Germany} {occupying great power} {MUN})
+(x-is-the-y-of-z {army} {occupying unit} {MUN})
+
+(x-is-the-y-of-z {Turkey} {current owner} {ANK})
+(x-is-the-y-of-z {Turkey} {occupying great power} {ANK})
+(x-is-the-y-of-z {fleet} {occupying unit} {ANK})
+
+(x-is-the-y-of-z {Turkey} {current owner} {CON})
+(x-is-the-y-of-z {Turkey} {occupying great power} {CON})
+(x-is-the-y-of-z {army} {occupying unit} {CON})
+
+(x-is-the-y-of-z {Turkey} {current owner} {SMY})
+(x-is-the-y-of-z {Turkey} {occupying great power} {SMY})
+(x-is-the-y-of-z {army} {occupying unit} {SMY})
+
+(x-is-the-y-of-z {England} {current owner} {EDI})
+(x-is-the-y-of-z {England} {occupying great power} {EDI})
+(x-is-the-y-of-z {fleet} {occupying unit} {EDI})
+
+(x-is-the-y-of-z {England} {current owner} {LVP})
+(x-is-the-y-of-z {England} {occupying great power} {LVP})
+(x-is-the-y-of-z {army} {occupying unit} {LVP})
+
+(x-is-the-y-of-z {England} {current owner} {LON})
+(x-is-the-y-of-z {England} {occupying great power} {LON})
+(x-is-the-y-of-z {fleet} {occupying unit} {LON})
+
+(x-is-the-y-of-z {Austria} {current owner} {BUD})
+(x-is-the-y-of-z {Austria} {occupying great power} {BUD})
+(x-is-the-y-of-z {army} {occupying unit} {BUD})
+
+(x-is-the-y-of-z {Austria} {current owner} {TRI})
+(x-is-the-y-of-z {Austria} {occupying great power} {TRI})
+(x-is-the-y-of-z {fleet} {occupying unit} {TRI})
+
+(x-is-the-y-of-z {Austria} {current owner} {VIE})
+(x-is-the-y-of-z {Austria} {occupying great power} {VIE})
+(x-is-the-y-of-z {army} {occupying unit} {VIE})
+
+(x-is-the-y-of-z {Russia} {current owner} {MOS})
+(x-is-the-y-of-z {Russia} {occupying great power} {MOS})
+(x-is-the-y-of-z {army} {occupying unit} {MOS})
+
+(x-is-the-y-of-z {Russia} {current owner} {STP})
+(x-is-the-y-of-z {Russia} {occupying great power} {STP})
+(x-is-the-y-of-z {fleet} {occupying unit} {STP})
+
+(x-is-the-y-of-z {Russia} {current owner} {SEV})
+(x-is-the-y-of-z {Russia} {occupying great power} {SEV})
+(x-is-the-y-of-z {fleet} {occupying unit} {SEV})
+
+(x-is-the-y-of-z {Russia} {current owner} {WAR})
+(x-is-the-y-of-z {Russia} {occupying great power} {WAR})
+(x-is-the-y-of-z {army} {occupying unit} {WAR})
+
+(x-is-the-y-of-z {Italy} {current owner} {NAP})
+(x-is-the-y-of-z {Italy} {occupying great power} {NAP})
+(x-is-the-y-of-z {fleet} {occupying unit} {NAP})
+
+(x-is-the-y-of-z {Italy} {current owner} {ROM})
+(x-is-the-y-of-z {Italy} {occupying great power} {ROM})
+(x-is-the-y-of-z {army} {occupying unit} {ROM})
+
+(x-is-the-y-of-z {Italy} {current owner} {VEN})
+(x-is-the-y-of-z {Italy} {occupying great power} {VEN})
+(x-is-the-y-of-z {army} {occupying unit} {VEN})
+
+(x-is-the-y-of-z {France} {current owner} {BRE})
+(x-is-the-y-of-z {France} {occupying great power} {BRE})
+(x-is-the-y-of-z {fleet} {occupying unit} {BRE})
+
+(x-is-the-y-of-z {France} {current owner} {MAR})
+(x-is-the-y-of-z {France} {occupying great power} {MAR})
+(x-is-the-y-of-z {army} {occupying unit} {MAR})
+
+(x-is-the-y-of-z {France} {current owner} {PAR})
+(x-is-the-y-of-z {France} {occupying great power} {PAR})
+(x-is-the-y-of-z {army} {occupying unit} {PAR})
 
 
-
-
-;;; Now we come to implementing moves.
-(new-type {order} {thing})
-
-(new-complete-split-subtypes {order}'({hold}
-                                      {support}
-                                      {move}
-                                      {convoy}))
-;;; Carrying out an order requires certain information depending on
-;;; the type of order we are dealing with.
-
-;;; For the {hold} move, we must know which city the hold is being ordered
-;;; for, who is the {great power} ordering it, and the number of supporters
-;;; and opposers for the {hold} order.
-
-(new-indv-role {location} {hold} {unit city})
-(new-indv-role {holding power} {hold} {great power})
-
-;;; A {convoy} order has properties such as which unit is performing the convoy,
-;;; and which army unit is being convoyed.
-;;; We also keep track of the 2 {great power} that are involved.
-;;;all properties defined as roles of convoy
-(new-indv-role {transporting country} {convoy} {great power})
-(new-indv-role {country being transported} {convoy} {great power})
-(new-indv-role {initial position} {convoy} {unit city})
-(new-indv-role {final position} {convoy} {unit city})
-
-;;; These are the properties of the {support} order.
-;;; {where} contains information about which unit city the support is being extended to.
-
-(new-indv-role {where} {support} {unit city})
-(new-indv-role {country supported} {support} {great power})
-;;; Information of which unit is providing the support and which {great power}
-;;; it belongs to.
-
-(new-indv-role {supporting unit} {support} {unit city})
-(new-indv-role {supporting country} {support} {great power})
-
-;;; These are the properties of the {move} order.
-(new-indv-role {initial} {move} {unit city})
-(new-indv-role {final} {move} {unit city})
-(new-indv-role {country} {move} {great power})
+;;; Some global variables for order execution.
+(defparameter *set-of-orders* (list))
+(defparameter *geo-valid-orders* (list))
+(defparameter *support-orders* (list))
+(defparameter *convoy-orders* (list))
+(defparameter *move-orders* (list))
+(defparameter *hold-orders* (list))
+(defparameter *final-move-orders* (list))
+(defparameter *final-hold-orders* (list))
 
 
 
+(defun equal-diplomacy-elements (elem1 elem2)
+  "This function returns true if two diplomacy elements are equal
+   and NIL otherwise."
+
+  (eq (lookup-element elem1) (lookup-element elem2)))
+
+;;; The initial location of an order is defined as the location at
+;;;which the ordered unit currently exists.
+(defun get-initial-location (order-line)
+  "This function returns the initial location of an order."
+  ;;; Hold order.
+  (when (equal (nth 0 order-line) "H")
+    (return-from get-initial-location (nth 2 order-line)))
+  ;;; Move order.
+  (when (equal (nth 0 order-line) "M")
+      (return-from get-initial-location (nth 2 order-line)))
+  ;;; Support order.
+  (when (equal (nth 0 order-line) "S")
+      (return-from get-initial-location (nth 3 order-line)))
+  ;;; Convoy order.
+  (when (equal (nth 0 order-line) "C")
+      (return-from get-initial-location (nth 2 order-line)))
+)
+
+
+;;; The final location of an order is described as follows:
+;;;       MOVE order: The proposed final destination of a unit.
+;;;       SUPPORT order: The proposed final destination of the order that
+;;;                      is being supported. The supporting unit does not
+;;;                      actually change its location to the final location.
+;;;       HOLD order: The final location is the same as the initial location.
+;;;       CONVOY order: The final location is the final destination of the army
+;;;                     that is being convoyed. The convoying fleet does not
+;;;                     actually change its location.
+
+(defun get-final-location (order-line)
+  "This function returns the final location of an order."
+  ;;; Hold order.
+  (when (equal (nth 0 order-line) "H")
+    (return-from get-final-location (nth 2 order-line)))
+  ;;; Move order.
+  (when (equal (nth 0 order-line) "M")
+    (return-from get-final-location (nth 3 order-line)))
+  ;;; Support order.
+  (when (equal (nth 0 order-line) "S")
+    (return-from get-final-location (nth 5 order-line)))
+  ;;; Convoy order.
+  (when (equal (nth 0 order-line) "C")
+    (return-from get-final-location (nth 4 order-line)))
+)
+
+
+;;; Some helper functions.
+
+(defun convoyee-initial-location(order-line)
+  "This function returns the initial location of the army that is being
+   convoyed."
+  (nth 3 order-line))
+
+(defun type-of-support (order-line)
+  "This function returns whether the support order is for a move(M)
+   or hold(H)."
+  (nth 2 order-line))
+
+(defun supportee-initial-location (order-line)
+  "This function returns the initial location of the unit that is being
+   supported."
+  (nth 4 order-line))
 
 
 
+(defun is-hold(order-line)
+  "This function returns true if the order is a hold."
+  (equal (nth 0 order-line) "H"))
+
+(defun is-support(order-line)
+  "This function returns true if the order is a support."
+  (equal (nth 0 order-line) "S"))
+
+(defun is-move(order-line)
+  "This function returns true if the order is a move."
+  (equal (nth 0 order-line) "M"))
+
+(defun is-convoy(order-line)
+  "This function returns true if the order is a convoy."
+  (equal (nth 0 order-line) "C"))
 
 
 
+(defun coast-valid (move-to-check)
+  "This function returns true if a convoying fleet is adjacent to the army
+   that is being convoyed."
+  (statement-true? (convoyee-initial-location move-to-check)
+                 {adjacent to} (get-initial-location move-to-check)))
 
 
 
+(defun geo-ok? (move-to-check)
+  "This function returns true if an order is geographically
+   valid without a convoy"
+
+  ;;; Hold orders are geographically valid.
+  (if (equal (get-initial-location move-to-check)
+             (get-final-location move-to-check)) (return-from geo-ok? t))
+  ;;; For convoy orders, check an additional condition.
+  (if(and (is-convoy move-to-check)
+           (not (coast-valid move-to-check))) (return-from geo-ok? NIL))
+  (statement-true? (get-initial-location move-to-check)
+                   {adjacent to} (get-final-location move-to-check)))
+
+
+
+(defun valid-support (x)
+  "This function takes in a {support} order and checks if the support is valid
+   or being cut in any way. A support is cut if there is a geographically valid
+   attack on the supporting unit, even if the attack is not successful."
+  (if (not (is-support x)) (return-from valid-support NIL))
+  (loop for y in *final-move-orders*
+    do (if (equal (get-final-location y) (get-initial-location x))
+      (return-from valid-support NIL)))
+  (return-from valid-support t))
+
+
+(defun orders-to (location)
+  "This function returns a list containing all the geographically valid
+   orders to a location."
+  (let ((orders-to-loc NIL))
+    (loop for x in *set-of-orders*
+      do (if (and (geo-ok? x)
+               (is-move x)
+               (equal (get-final-location x) location))
+        (setf orders-to-loc (append orders-to-loc (list x)))))
+    (return-from orders-to orders-to-loc)))
+
+(defun add-support-move (move-order)
+  "This function adds all the valid supporters for a move order and places the
+   order in a new list."
+  (let ((n 0))
+    (loop for y in *support-orders*
+      do (if (and  (equal (get-final-location move-order) (get-final-location y))
+                   (equal (get-initial-location move-order)
+                          (supportee-initial-location y))
+                           (valid-support y))
+                   (setf n (+ n 1))))
+    (setf *final-move-orders* (append *final-move-orders* (list
+                                                           (list (nth 0 move-order)
+                                                                 (nth 1 move-order)
+                                                                 (nth 2 move-order)
+                                                                 (nth 3 move-order)
+                                                                 n
+                                                                 (nth 5 move-order
+                                                                      )))))))
+;;; Floating paren so I do not exceed 80 char limit.
+(defun get-move-supporters (move-order)
+  "This function adds all the valid supporters for a
+   move order and returns the value."
+    (let ((n 0))
+    (loop for y in *support-orders*
+      do (if (and (equal (get-final-location move-order) (get-final-location y))
+                  (equal (get-initial-location move-order)
+                          (supportee-initial-location y)))
+                   (setf n (+ n 1))))
+    (return-from get-move-supporters n)))
+
+
+(defun add-support-hold (hold-order)
+"This function adds all the valid supporters for a support order and places the
+ order in a new list."
+  (let ((n 0))
+    (loop for y in *support-orders*
+      do (if (and (valid-support y)
+                  (equal (get-final-location hold-order) (get-final-location y))
+                  (equal (get-initial-location hold-order)
+                         (supportee-initial-location y)))
+           (setf n (+ n 1))))
+    (setf *final-hold-orders* (append *final-hold-orders* (list
+                                                           (nth 0 hold-order)
+                                                           (nth 1 hold-order)
+                                                           (nth 2 hold-order)
+                                                           (nth 3 hold-order)
+                                                           n
+                                                           (nth 5 hold-order))))))
+
+(defun add-support-convoy(convoy-order)
+  "This function adds all the valid supporters for
+   a convoy order and returns the number."
+  (let ((n 0))
+    (loop for y in *support-orders*
+      do (if (and (valid-support y)
+                  (equal (nth 2 convoy-order) (get-final-location y))
+                  (equal (nth 2 convoy-order)(supportee-initial-location y)))
+                  (setf n (+ n 1))))
+    (return-from add-support-convoy n)))
+
+
+(defun count-convoy(convoy-order)
+  "This function returns true if a
+   geographically valid convoy can be succesfully carried out."
+  (let ((attacks (orders-to (get-initial-location convoy-order)))
+        (no-of-fleet-supporters (add-support-convoy convoy-order)))
+    (loop for x in attacks
+      do (if (> (get-move-supporters x) no-of-fleet-supporters)
+           (return-from count-convoy NIL))))
+  (return-from count-convoy t))
+
+
+
+(defun valid-convoy-exists(move-to-check)
+  "This function returns true if there exists a valid
+   convoy for the given move order."
+  (loop for x in *convoy-orders*
+   do(if (and (equal (convoyee-initial-location x)
+                     (get-initial-location move-to-check))
+            (equal (get-final-location x) (get-final-location move-to-check))
+            (count-convoy x))
+       (return-from valid-convoy-exists t)
+       )
+
+    ))
+
+
+(defun geo-ok-with-convoy? (move-to-check)
+  "This function returns true if an order is geographically ok with a convoy."
+  (if (equal (get-initial-location move-to-check)
+             (get-final-location move-to-check))
+    (return-from geo-ok-with-convoy? t))
+  (if(and (is-convoy move-to-check)
+          (not (coast-valid move-to-check)))
+    (return-from geo-ok-with-convoy? NIL))
+  (or (statement-true? (get-initial-location move-to-check){adjacent to}
+                       (get-final-location move-to-check))
+      (valid-convoy-exists move-to-check)))
+
+
+(defun make-move (order)
+  "This function completes a valid order."
+  (let ((initial-location (nth 2 order))
+        (final-location (nth 3 order))
+        (type-of-unit (nth 1 order))
+        (owner-of-unit (nth 5 order)))
+      (if (equal type-of-unit "F") (x-is-the-y-of-z
+                                    {fleet} {occupying unit} final-location))
+      (if (equal type-of-unit "A") (x-is-the-y-of-z {army}
+                                                    {occupying unit}
+                                                    final-location))
+      (x-is-the-y-of-z owner-of-unit {occupying great power} final-location)
+      (x-is-the-y-of-z {NONE} {occupying great power} initial-location)
+
+    )
+  )
+
+(defun best-move (x)
+  "This function returns true if a move order to a location is the strongest
+   move to that location"
+  (let  ((r 0))
+  (loop for y in *final-move-orders*
+       do (if  (equal (get-final-location x) (get-final-location y))
+           (if (<= (nth 4 x) (nth 4 y))
+             (if (not (equal (get-initial-location x) (get-initial-location y)))
+             (setq r 1)))))
+    (eq r 0)))
+
+
+
+(defun final-resolution()
+  "This function makes moves once the number of supporters for each
+   order has been determined."
+   (let  ((p 0))
+      (loop for x in *final-move-orders*
+        do(when (best-move x)
+            (setf p 0)
+            (if (= (nth 4 x) 0)(setf p 1))
+            ;;; final unoccupied
+            (if (equal-diplomacy-elements (the-x-of-y {occupying great power}
+                                                      (get-final-location x))
+                                          NIL) (setf p 0))
+            (if (equal-diplomacy-elements (the-x-of-y {occupying great power}
+                                                        (get-final-location x))
+                                                      {NONE}) (setf p 0))
+
+
+            (loop for y in *hold-orders*
+              do (
+                  if (and (equal (get-final-location x) (get-initial-location y))
+                          (>= (nth 4 x) (nth 3 y )))
+                   (setf p 1)))
+             ;;; If the move has more supporters than the hold, or
+             ;;; there is no hold, make the move.
+              (if (eq p 0) (make-move x))))))
+
+(defun get-type-of-unit-ordered (order-line)
+  "This function returns the type of unit an order is for."
+      (let ((ordered-unit (nth 1 order-line )))
+        (if(equal ordered-unit "F")
+          (return-from get-type-of-unit-ordered {fleet}))
+        (return-from get-type-of-unit-ordered {army})))
+(defun unit-valid(order-line)
+  "This function returns true if the ordered unit can move to the desired
+   position."
+  (or
+   (and (equal-diplomacy-elements (get-type-of-unit-ordered order-line)
+                                  {fleet})
+        (equal (is-x-a-y? (get-final-location order-line) {fleet legal region})
+               :yes))
+   (and (equal-diplomacy-elements (get-type-of-unit-ordered order-line) {army})
+        (equal (is-x-a-y? (get-final-location order-line) {army legal region})
+               :yes))))
+
+
+;;; Move orders are  expressed in text as following:
+;;; M A Kie Ber (An army moving from Kie to Ber)
+;;; M F NTH Den (A fleet moving from NTH to Den)
+;;; Hold orders are commonly expressed in text as following:
+;;; H A KIE  (An army in Kie will hold)
+;;; H F NTH  (A fleet in NTH will hold)
+;;; Support orders are commonly expressed in text as following:
+;;; S A M Kie Pru Ber (An army in Kie supports a unit in Pru moving into Ber)
+;;; S A H Kie Ber (An army in Kie supports a unit in Ber holding)
+;;; S F M NTH Swe Den (A fleet in NTH supports a unit in Swe moving into Den)
+;;; S F H NTH Den (A fleet in NTH supports a unit in Den holding)
+;;; Convoy orders are expressed as:
+;;; C F ENG LON BER
+;;; To support a convoy, support the convoying fleet to hold.
+;;; General format for order-line: (list "S" "F" "" "" .....)
+;;; (order-input Austria order-line)
+;;; For now, please use the standard 3 letter names for regions.
+;;; This will be polished to allow for flexibility in names.
+
+(defun order-input (player order-line)
+  "This function takes in a diplomacy order and adds it to
+   the set of orders to be resolved."
+  (when (equal (nth 0 order-line) "H")
+    (setf order-line (append order-line (list 0))))
+  (when (equal (nth 0 order-line) "M")
+      (setf order-line (append order-line (list 0))))
+  (when (equal (nth 0 order-line) "C")
+    (setf order-line (append order-line (list 0))))
+  (setf order-line (append order-line (list player)))
+  (if (and (equal-diplomacy-elements (get-type-of-unit-ordered order-line)
+                                     (the-x-of-y {occupying unit}
+                                                 (get-initial-location
+                                                  order-line)))
+           (equal-diplomacy-elements player (the-x-of-y {occupying great power}
+                                                        (get-initial-location
+                                                         order-line)))
+           (unit-valid order-line))
+       (setf *set-of-orders* (append *set-of-orders* (list order-line)))))
+
+
+(defun execute-orders()
+  "This function resolves all orders in the set-of-orders list."
+  ;;; Store all the geographically valid orders in a list.
+  (loop for x in *set-of-orders*
+    do (if (geo-ok? x) (setf *geo-valid-orders*
+                                    (append *geo-valid-orders* (list x)))))
+  (write "here")
+  ;;; Make lists of {move}, {hold} and {support} orders.
+  (loop for x in *geo-valid-orders*
+    do (if(is-support x)
+         (setf *support-orders* (append *support-orders* (list x)))))
+
+  (loop for x in *geo-valid-orders*
+    do (if (is-move x) (setf *move-orders* (append *move-orders* (list x)))))
+  (loop for x in *geo-valid-orders*
+    do (if (is-hold x) (setf *hold-orders* (append *hold-orders* (list x)))))
+
+  (loop for x in *geo-valid-orders*
+    do (if (and (is-convoy x) (count-convoy x)) (setf *convoy-orders*
+                                                      (append *convoy-orders*
+                                                              (list x)))))
+  (setf *move-orders* NIL)
+  (setf *final-move-orders* NIL)
+  (write "hello")
+  ;;; Some additional move orders may be possible due to convoy orders.
+  (loop for x in *set-of-orders*
+     do(if (and (is-move x) (geo-ok-with-convoy? x))
+         (setf *final-move-orders* (append *final-move-orders* (list x)))))
+
+   ;;; Count the number of supporters for {hold} and {move} orders.
+  (loop for x in *final-move-orders* do (add-support-move x))
+  (loop for x in *hold-orders* do(add-support-hold x))
+
+  ;;; Change the state of the game based on the supporters and opposers
+  ;;; for each order.
+  (write "before")
+  (final-resolution)
+  (write "after")
+  )
