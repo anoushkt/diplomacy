@@ -43,10 +43,22 @@
 ;;; 2 Units trying to swap, nothing happens
 (order-input "France" (list "M" "A" "MUN" "SIL"))
 (order-input "Russia" (list "M" "A" "SIL" "MUN"))
+(order-input "Russia" (list "M" "A" "MOS" "WAR"))
 
 ;;; SET 8
+;;; Nothing happens
+(order-input "Germany"  (list "M" "A" "BER" "PRU"))
+(order-input "Russia" (list "M" "A" "WAR" "PRU"))
 
+;;;SET 9
+;;; nothing happens
+(order-input "Germany"  (list "M" "A" "BER" "PRU"))
+(order-input "Russia" (list "M" "A" "WAR" "PRU"))
+(order-input "France" (list "M" "A" "MUN" "BER"))
 
+;;; SET 10
+(order-input "Germany"  (list "M" "A" "BER" "PRU"))
+(order-input "France" (list "M" "A" "MUN" "BER"))
 
 
 
