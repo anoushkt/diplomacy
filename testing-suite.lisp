@@ -61,8 +61,15 @@
 (order-input "France" (list "M" "A" "MUN" "BER"))
 
 
+;;; TEST 3
 
+;;; 1-9 same as 2
 
+(order-input "Germany"  (list "M" "A" "BER" "PRU"))
+(order-input "Russia" (list "M" "A" "WAR" "PRU")) 
+(order-input "Russia" (list "S" "A" "M" "SIL" "WAR" "PRU"))
+(order-input "France" (list "M" "A" "MUN" "SIL"))
+;;; sup cut, nothing happens
 
 
 
