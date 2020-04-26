@@ -65,11 +65,27 @@
 
 ;;; 1-9 same as 2
 
+
+;;; SET 10
 (order-input "Germany"  (list "M" "A" "BER" "PRU"))
 (order-input "Russia" (list "M" "A" "WAR" "PRU")) 
 (order-input "Russia" (list "S" "A" "M" "SIL" "WAR" "PRU"))
 (order-input "France" (list "M" "A" "MUN" "SIL"))
 ;;; sup cut, nothing happens
+
+;;; SET 11
+(order-input "Germany"  (list "M" "A" "BER" "PRU"))
+(order-input "Russia" (list "M" "A" "WAR" "PRU")) 
+(order-input "Russia" (list "S" "A" "M" "SIL" "WAR" "PRU"))
+;;; SET 12
+(order-input "Russia" (list "M" "A" "PRU" "SWE"))
+(order-input "Russia" (list "M" "F" "STP" "BOT"))
+;;;SET 13
+(order-input "Russia" (list "M" "F" "BOT" "BAL"))
+;;;set 14
+(order-input "Russia" (list "M" "A" "PRU" "SWE"))
+(order-input "Russia" (list "C" "F" "BAL" "PRU" "SWE"))
+
 
 
 
