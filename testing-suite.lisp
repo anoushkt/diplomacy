@@ -140,7 +140,9 @@
  (order-input "Turkey" (list "M" "F" "BLA" "RUM"))
  (order-input "Austria" (list "M" "A" "SER" "BUL"))
  (order-input "Russia" (list "M" "A" "UKR" "RUM"))
- ;;;set 4
  
-
-
+ ;;;set 4
+ ;;; sup cut but still best
+(order-input "Turkey" (list "S" "A" "M" "BUL" "BLA" "RUM"))
+(order-input "Turkey" (list "M" "F" "BLA" "RUM"))
+ (order-input "Austria" (list "M" "A" "SER" "BUL"))
