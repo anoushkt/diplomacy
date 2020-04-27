@@ -104,7 +104,30 @@
  (order-input "Turkey" (list "M" "F" "GRE" "ION"))
  
  ;;; set 20        
+(order-input "Italy" (list "M" "F" "APU" "ADR"))
+(order-input "Turkey" (list "M" "F" "ION" "ADR"))
+ ;;; set 21
+(order-input "Turkey" (list "M" "F" "ION" "ADR"))
+ 
+ ;;; set 22
+ (order-input "Turkey" (list "M" "F" "ADR" "TRI"))
+ (order-input "Italy" (list "M" "A" "VEN" "TRI"))
+             
+ ;;; set 23
+ ;;; equally supported moves, none suceeds
+ (order-input "Austria" (list "S" "A" "M" "TYR" "ADR" "TRI"))
+ (order-input "Turkey" (list "M" "F" "ADR" "TRI"))
+ (order-input "Italy" (list "M" "A" "VEN" "TRI"))
+ (order-input "Austria" (list "S" "A" "M" "BUD" "VEN" "TRI"))
+ 
+ 
+ ;;;RESTART
 
-
+ ;;; SET 1
+(order-input "Austria" (list "M" "A" "BUD" "SER"))
+(order-input "Turkey" (list "M" "F" "ANK" "BLA"))
+(order-input "Russia" (list "M" "A" "MOS" "UKR"))
+(order-input "Turkey" (list "M" "F" "CON" "BUL"))
+;;;SET2 
 
 
