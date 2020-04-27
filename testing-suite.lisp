@@ -129,5 +129,18 @@
 (order-input "Russia" (list "M" "A" "MOS" "UKR"))
 (order-input "Turkey" (list "M" "F" "CON" "BUL"))
 ;;;SET2 
+;;; nothing
+(order-input "Russia" (list "M" "A" "UKR" "RUM"))
+(order-input "Turkey" (list "M" "A" "BUL" "RUM"))
+             
+ ;;; SET3
+ ;;; cut support, and multiple moves to same loc. none work.
+ 
+ (order-input "Turkey" (list "S" "A" "M" "BUL" "BLA" "RUM"))
+ (order-input "Turkey" (list "M" "F" "BLA" "RUM"))
+ (order-input "Austria" (list "M" "A" "SER" "BUL"))
+ (order-input "Russia" (list "M" "A" "UKR" "RUM"))
+ ;;;set 4
+ 
 
 
