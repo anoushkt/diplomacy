@@ -86,6 +86,24 @@
 (order-input "Russia" (list "M" "A" "PRU" "SWE"))
 (order-input "Russia" (list "C" "F" "BAL" "PRU" "SWE"))
 
+;;; SET 15
+(order-input "Russia" (list "M" "F" "BAL" "BOT"))
+(order-input "Russia" (list "M" "A" "SWE" "FIN")
+             
+;;; SET 16
+(order-input "Turkey" (list "M" "F" "ANK" "BLA"))
+(order-input "Italy" (list "M" "F" "NAP" "APU"))
+
+ ;;; set 17
+ (order-input "Turkey" (list "M" "F" "BLA" "BUL"))
+ 
+ ;;; set 18
+ (order-input "Turkey" (list "M" "F" "BUL" "GRE"))
+ 
+ ;;; set 19
+ (order-input "Turkey" (list "M" "F" "GRE" "ION"))
+ 
+ ;;; set 20        
 
 
 
