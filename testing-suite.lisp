@@ -1,3 +1,4 @@
+;;; Use this to reset.
 (setf *set-of-orders* NIL)
 (setf *geo-valid-orders* NIL)
 (setf *support-orders* NIL)
@@ -6,10 +7,9 @@
 (setf *hold-orders* NIL)
 (setf *convoy-orders* NIL)
 (setf *final-move-orders* NIL)
-
 (setf *final-hold-orders* NIL)
 
-;;; nothing happens
+;;; Not enough support,nothing happens
 (order-input "France" (list "M" "A" "PAR" "BRE"))
 
 ;;; RESET before every set of orders
@@ -48,12 +48,12 @@
 (order-input "Russia" (list "M" "A" "MOS" "WAR"))
 
 ;;; SET 8
-;;; Nothing happens
+;;; Nothing happens.
 (order-input "Germany"  (list "M" "A" "BER" "PRU"))
 (order-input "Russia" (list "M" "A" "WAR" "PRU"))
 
 ;;;SET 9
-;;; nothing happens
+;;; Nothing happens.
 (order-input "Germany"  (list "M" "A" "BER" "PRU"))
 (order-input "Russia" (list "M" "A" "WAR" "PRU"))
 (order-input "France" (list "M" "A" "MUN" "BER"))
@@ -62,12 +62,8 @@
 (order-input "Germany"  (list "M" "A" "BER" "PRU"))
 (order-input "France" (list "M" "A" "MUN" "BER"))
 
-
 ;;; TEST 3
-
 ;;; 1-9 same as 2
-
-
 ;;; SET 10
 (order-input "Germany"  (list "M" "A" "BER" "PRU"))
 (order-input "Russia" (list "M" "A" "WAR" "PRU")) 
@@ -80,7 +76,11 @@
 (order-input "Russia" (list "M" "A" "WAR" "PRU")) 
 (order-input "Russia" (list "S" "A" "M" "SIL" "WAR" "PRU"))
 
-;;; here onwards doesnt work
+;;; Here onwards till SET 23 doesnt work the way it would without
+;;; multiple coasts, it can be ignored.
+;;; I am leaving it in just as a few sample orders.
+;;; The orders will still execute correctly, but probably will
+;;; not test what I wanted them to check.
 ;;; SET 12
 (order-input "Russia" (list "M" "A" "PRU" "SWE"))
 (order-input "Russia" (list "M" "F" "STP" "BOT"))
@@ -125,8 +125,7 @@
  (order-input "Austria" (list "S" "A" "M" "BUD" "VEN" "TRI"))
  
  
- ;;;RESTART
-
+ ;;; RESTART THE GAME
  ;;; SET 1
 (order-input "Austria" (list "M" "A" "BUD" "SER"))
 (order-input "Turkey" (list "M" "F" "ANK" "BLA"))
@@ -136,23 +135,21 @@
 ;;; nothing
 (order-input "Russia" (list "M" "A" "UKR" "RUM"))
 (order-input "Turkey" (list "M" "A" "BUL" "RUM"))
-             
- ;;; SET3
- ;;; cut support, and multiple moves to same loc. none work.
- 
- (order-input "Turkey" (list "S" "A" "M" "BUL" "BLA" "RUM"))
- (order-input "Turkey" (list "M" "F" "BLA" "RUM"))
- (order-input "Austria" (list "M" "A" "SER" "BUL"))
- (order-input "Russia" (list "M" "A" "UKR" "RUM"))
- 
- ;;;set 4
- ;;; sup cut but still best
+;;; SET3
+;;; cut support, and multiple moves to same loc. none work.
 (order-input "Turkey" (list "S" "A" "M" "BUL" "BLA" "RUM"))
 (order-input "Turkey" (list "M" "F" "BLA" "RUM"))
- (order-input "Austria" (list "M" "A" "SER" "BUL"))
-;;; restart
-;;; coast stuff   
-;;; tests 1             
+(order-input "Austria" (list "M" "A" "SER" "BUL"))
+(order-input "Russia" (list "M" "A" "UKR" "RUM"))
+;;;set 4
+;;; Support cut but still best move.
+(order-input "Turkey" (list "S" "A" "M" "BUL" "BLA" "RUM"))
+(order-input "Turkey" (list "M" "F" "BLA" "RUM"))
+(order-input "Austria" (list "M" "A" "SER" "BUL"))
+
+;;; Restart the game.
+;;; Coast stuff   
+;;; Test 1             
 ;;; set 1
 (order-input "Turkey" (list "M" "F" "ANK" "BLA"))
 (order-input "Austria" (list "M" "A" "BUD" "GAL"))             
@@ -180,11 +177,11 @@
 (order-input "France" (list "M" "A" "BUR" "MUN"))
 (order-input "Germany" (list "S" "A" "H" "BER" "MUN"))
 (order-input "Germany" (list "H" "A" "MUN"))
- ;;; set 10
- (order-input "Austria" (list  "S" "A" "M" "TYR" "BUR" "MUN"))
- (order-input "France" (list "M" "A" "BUR" "MUN"))
- (order-input "Germany" (list "H" "A" "MUN"))            
-             
- ;;; new
- (order-input "England" (list "M" "F" "WES" "SPA SC"))
- (order-input "Germany" (list "M" "A" "POR" "SPA NC"))            
+;;; set 10
+(order-input "Austria" (list  "S" "A" "M" "TYR" "BUR" "MUN"))
+(order-input "France" (list "M" "A" "BUR" "MUN"))
+(order-input "Germany" (list "H" "A" "MUN"))            
+
+;;; NEW GAME             
+(order-input "England" (list "M" "F" "WES" "SPA SC"))
+(order-input "Germany" (list "M" "A" "POR" "SPA NC"))            
