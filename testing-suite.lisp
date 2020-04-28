@@ -185,5 +185,6 @@
  (order-input "France" (list "M" "A" "BUR" "MUN"))
  (order-input "Germany" (list "H" "A" "MUN"))            
              
-             
-             
+ ;;; new
+ (order-input "England" (list "M" "F" "WES" "SPA SC"))
+ (order-input "Germany" (list "M" "A" "POR" "SPA NC"))            
