@@ -16,8 +16,9 @@
 (new-is-a {coastal region} {fleet legal region})
 
 ;;; The type of unit that occupies a region.
-(new-indv {unit} {thing})
-(new-complete-split-subtypes {unit} '({army} {fleet} ))
+(new-type {unit} {thing})
+(new-indv {army} {unit})
+(new-indv {fleet} {unit})
 
 ;;; Every valid region on the map is either a land, water
 ;;; or coastal region.
@@ -59,7 +60,7 @@
 (new-indv {EDI} {coastal region})
 (new-indv {BUD} {land region})
 (new-indv {GAL} {land region})
-(new-indv {TRI} {land region})
+(new-indv {TRI} {coastal region})
 (new-indv {VIE} {land region})
 (new-indv {BOH} {land region})
 (new-indv {TYR} {land region})
@@ -98,6 +99,21 @@
 (new-indv {RUM} {coastal region})
 
 
+
+(new-type {subcoast} {coastal region})
+(new-indv {STP NC} {subcoast})
+(new-indv {STP SC} {subcoast})
+(new-indv {SPA NC} {subcoast})
+(new-indv {SPA SC} {subcoast})
+(new-indv {BUL EC} {subcoast})
+(new-indv {BUL SC} {subcoast})
+
+
+
+
+
+
+
 ;;; Each diplomacy player is assigned a great power.
 (new-type {great power} {thing})
 (new-indv {Austria} {great power})
@@ -114,12 +130,16 @@
 ;;; armies and fleets.
 (new-type {supply center} {diplomacy region})
 (new-is-a {ROM} {supply center})
+(new-is-a {BUL EC} {supply center})
+(new-is-a {BUL SC} {supply center})
 (new-is-a {BUL} {supply center})
 (new-is-a {SER} {supply center})
 (new-is-a {DEN} {supply center})
 (new-is-a {SWE} {supply center})
 (new-is-a {NWY} {supply center})
 (new-is-a {POR} {supply center})
+(new-is-a {SPA NC} {supply center})
+(new-is-a {SPA SC} {supply center})
 (new-is-a {SPA} {supply center})
 (new-is-a {POR} {supply center})
 (new-is-a {TUN} {supply center})
@@ -138,6 +158,8 @@
 (new-is-a {TRI} {supply center})
 (new-is-a {VIE} {supply center})
 (new-is-a {MOS} {supply center})
+(new-is-a {STP NC} {supply center})
+(new-is-a {STP SC} {supply center})
 (new-is-a {STP} {supply center})
 (new-is-a {SEV} {supply center})
 (new-is-a {WAR} {supply center})
@@ -182,11 +204,8 @@
 (new-statement {WAR} {adjacent to} {LVN})
 (new-statement {NAF} {adjacent to} {TUN})
 (new-statement {MOS} {adjacent to} {LVN})
-(new-statement {MOS} {adjacent to} {STP})
 (new-statement {LVN} {adjacent to} {BAL})
-(new-statement {LVN} {adjacent to} {STP})
 (new-statement {LVN} {adjacent to} {PRU})
-(new-statement {STP} {adjacent to} {BOT})
 (new-statement {NAP} {adjacent to} {APU})
 (new-statement {NAP} {adjacent to} {ROM})
 (new-statement {NAP} {adjacent to} {TYN})
@@ -199,6 +218,7 @@
 (new-statement {TUS} {adjacent to} {GOL})
 (new-statement {TUS} {adjacent to} {VEN})
 (new-statement {TUS} {adjacent to} {PIE})
+(new-statement {UKR} {adjacent to} {LVN})
 (new-statement {VEN} {adjacent to} {ADR})
 (new-statement {VEN} {adjacent to} {PIE})
 (new-statement {VEN} {adjacent to} {TYR})
@@ -227,6 +247,7 @@
 (new-statement {RUH} {adjacent to} {HOL})
 (new-statement {RUH} {adjacent to} {BUR})
 (new-statement {KIE} {adjacent to} {SIL})
+(new-statement {BLA} {adjacent to} {RUM})
 (new-statement {KIE} {adjacent to} {DEN})
 (new-statement {KIE} {adjacent to} {HOL})
 (new-statement {KIE} {adjacent to} {BAL})
@@ -234,7 +255,6 @@
 (new-statement {MAR} {adjacent to} {BUR})
 (new-statement {MAR} {adjacent to} {GAS})
 (new-statement {MAR} {adjacent to} {GOL})
-(new-statement {MAR} {adjacent to} {SPA})
 (new-statement {BUR} {adjacent to} {PAR})
 (new-statement {PAR} {adjacent to} {PIC})
 (new-statement {PAR} {adjacent to} {GAS})
@@ -275,24 +295,21 @@
 (new-statement {VIE} {adjacent to} {TYR})
 (new-statement {BOH} {adjacent to} {TYR})
 (new-statement {GRE} {adjacent to} {SER})
-(new-statement {GRE} {adjacent to} {BUL})
-(new-statement {GRE} {adjacent to} {AEG})
-(new-statement {BUL} {adjacent to} {BLA})
-(new-statement {BUL} {adjacent to} {RUM})
-(new-statement {BUL} {adjacent to} {SER})
-(new-statement {BUL} {adjacent to} {GRE})
-(new-statement {BUL} {adjacent to} {AEG})
-(new-statement {BUL} {adjacent to} {CON})
 (new-statement {SER} {adjacent to} {BUD})
 (new-statement {SER} {adjacent to} {ALB})
 (new-statement {SER} {adjacent to} {GRE})
-(new-statement {SER} {adjacent to} {BUL})
 (new-statement {SER} {adjacent to} {RUM})
 (new-statement {ALB} {adjacent to} {ADR})
 (new-statement {ALB} {adjacent to} {GRE})
 (new-statement {FIN} {adjacent to} {BOT})
 (new-statement {SWE} {adjacent to} {BOT})
 (new-statement {SWE} {adjacent to} {BAL})
+(new-statement {BAL} {adjacent to} {BOT})
+(new-statement {GRE} {adjacent to} {ION})
+(new-statement {ION} {adjacent to} {NAP})
+(new-statement {ION} {adjacent to} {ALB})
+
+
 (new-statement {DEN} {adjacent to} {BAL})
 (new-statement {DEN} {adjacent to} {NTH})
 (new-statement {HOL} {adjacent to} {KIE})
@@ -302,14 +319,29 @@
 (new-statement {BEL} {adjacent to} {ENG})
 (new-statement {BEL} {adjacent to} {RUH})
 (new-statement {BEL} {adjacent to} {PIC})
-(new-statement {SPA} {adjacent to} {GOL})
-(new-statement {SPA} {adjacent to} {MID})
-(new-statement {SPA} {adjacent to} {GAS})
-(new-statement {SPA} {adjacent to} {POR})
 (new-statement {POR} {adjacent to} {MID})
 (new-statement {WES} {adjacent to} {NAF})
 (new-statement {WES} {adjacent to} {TUN})
 (new-statement {TYN} {adjacent to} {TUN})
+
+(new-statement {STP NC} {adjacent to} {BAR})
+(new-statement {STP NC} {adjacent to} {NWY})
+(new-statement {STP SC} {adjacent to} {FIN})
+(new-statement {STP SC} {adjacent to} {BOT})
+(new-statement {STP SC} {adjacent to} {LVN})
+(new-statement {SPA NC} {adjacent to} {GAS})
+(new-statement {STP SC} {adjacent to} {MOS})
+(new-statement {SPA NC} {adjacent to} {POR})
+(new-statement {SPA NC} {adjacent to} {MID})
+(new-statement {SPA SC} {adjacent to} {POR})
+(new-statement {SPA SC} {adjacent to} {MID})
+(new-statement {SPA SC} {adjacent to} {WES})
+(new-statement {BUL SC} {adjacent to} {GRE})
+(new-statement {BUL SC} {adjacent to} {AEG})
+(new-statement {BUL SC} {adjacent to} {CON})
+(new-statement {BUL EC} {adjacent to} {CON})
+(new-statement {BUL EC} {adjacent to} {RUM})
+(new-statement {BUL EC} {adjacent to} {BLA})
 
 ;;; The {occupying unit} of a {diplomacy region}
 ;;; tells us whether the region is occupied by an army
@@ -388,6 +420,11 @@
 (x-is-the-y-of-z {Russia} {occupying great power} {STP})
 (x-is-the-y-of-z {fleet} {occupying unit} {STP})
 
+
+(x-is-the-y-of-z {Russia} {current owner} {STP NC})
+(x-is-the-y-of-z {Russia} {occupying great power} {STP NC})
+(x-is-the-y-of-z {fleet} {occupying unit} {STP NC})
+
 (x-is-the-y-of-z {Russia} {current owner} {SEV})
 (x-is-the-y-of-z {Russia} {occupying great power} {SEV})
 (x-is-the-y-of-z {fleet} {occupying unit} {SEV})
@@ -422,14 +459,16 @@
 
 
 ;;; Some global variables for order execution.
-(defparameter *set-of-orders* (list))
-(defparameter *geo-valid-orders* (list))
-(defparameter *support-orders* (list))
-(defparameter *convoy-orders* (list))
-(defparameter *move-orders* (list))
-(defparameter *hold-orders* (list))
-(defparameter *final-move-orders* (list))
-(defparameter *final-hold-orders* (list))
+(defparameter *set-of-orders* NIL)
+(defparameter *geo-valid-orders* NIL)
+(defparameter *support-orders* NIL)
+(defparameter *convoy-orders* NIL)
+(defparameter *move-orders* NIL)
+(defparameter *hold-orders* NIL)
+(defparameter *final-move-orders* NIL)
+(defparameter *final-hold-orders* NIL)
+
+
 
 
 
@@ -438,6 +477,15 @@
    and NIL otherwise."
 
   (eq (lookup-element elem1) (lookup-element elem2)))
+
+(defun not-dip (x)
+  (if (equal x :maybe)
+  (return-from not-dip t))
+  (if (equal x :yes)
+  (return-from not-dip NIL))
+  (if (equal x :no)
+  (return-from not-dip t))
+  )
 
 ;;; The initial location of an order is defined as the location at
 ;;;which the ordered unit currently exists.
@@ -457,6 +505,10 @@
       (return-from get-initial-location (nth 2 order-line)))
 )
 
+(defun type-of-support (order-line)
+  "This function returns whether the support order is for a move(M)
+   or hold(H)."
+  (nth 2 order-line))
 
 ;;; The final location of an order is described as follows:
 ;;;       MOVE order: The proposed final destination of a unit.
@@ -468,6 +520,9 @@
 ;;;                     that is being convoyed. The convoying fleet does not
 ;;;                     actually change its location.
 
+
+
+
 (defun get-final-location (order-line)
   "This function returns the final location of an order."
   ;;; Hold order.
@@ -478,7 +533,10 @@
     (return-from get-final-location (nth 3 order-line)))
   ;;; Support order.
   (when (equal (nth 0 order-line) "S")
-    (return-from get-final-location (nth 5 order-line)))
+    (if (equal (type-of-support order-line) "H") (return-from get-final-location (nth 4 order-line)))
+    (return-from get-final-location (nth 5 order-line))
+
+    )
   ;;; Convoy order.
   (when (equal (nth 0 order-line) "C")
     (return-from get-final-location (nth 4 order-line)))
@@ -491,11 +549,6 @@
   "This function returns the initial location of the army that is being
    convoyed."
   (nth 3 order-line))
-
-(defun type-of-support (order-line)
-  "This function returns whether the support order is for a move(M)
-   or hold(H)."
-  (nth 2 order-line))
 
 (defun supportee-initial-location (order-line)
   "This function returns the initial location of the unit that is being
@@ -527,6 +580,17 @@
    that is being convoyed."
   (statement-true? (convoyee-initial-location move-to-check)
                  {adjacent to} (get-initial-location move-to-check)))
+(defun get-whole-unit(x)
+  (if (not-dip (is-x-a-y? x {subcoast})) (return-from get-whole-unit x))
+  (if (or(equal-diplomacy-elements x {STP NC})
+         (equal-diplomacy-elements x {STP SC}))
+    (return-from get-whole-unit "STP"))
+  (if (or(equal-diplomacy-elements x {BUL EC})
+         (equal-diplomacy-elements x {BUL SC}))
+    (return-from get-whole-unit "BUL"))
+  (if (or (equal-diplomacy-elements x {SPA NC})
+          (equal-diplomacy-elements x {SPA SC}))
+    (return-from get-whole-unit "SPA")))
 
 
 
@@ -551,7 +615,7 @@
    attack on the supporting unit, even if the attack is not successful."
   (if (not (is-support x)) (return-from valid-support NIL))
   (loop for y in *final-move-orders*
-    do (if (equal (get-final-location y) (get-initial-location x))
+    do (if (equal (get-whole-unit (get-final-location y)) (get-whole-unit (get-initial-location x)))
       (return-from valid-support NIL)))
   (return-from valid-support t))
 
@@ -609,12 +673,12 @@
                          (supportee-initial-location y)))
            (setf n (+ n 1))))
     (setf *final-hold-orders* (append *final-hold-orders* (list
+                                                           (list
                                                            (nth 0 hold-order)
                                                            (nth 1 hold-order)
                                                            (nth 2 hold-order)
-                                                           (nth 3 hold-order)
                                                            n
-                                                           (nth 5 hold-order))))))
+                                                           (nth 4 hold-order)))))))
 
 (defun add-support-convoy(convoy-order)
   "This function adds all the valid supporters for
@@ -667,6 +731,35 @@
       (valid-convoy-exists move-to-check)))
 
 
+
+(defun get-other-coast (x)
+  (if (equal-diplomacy-elements x "STP NC")
+    (return-from get-other-coast "STP SC")
+    )
+  (if (equal-diplomacy-elements x "STP SC")
+     (return-from get-other-coast "STP NC"))
+
+  (if (equal-diplomacy-elements x "SPA NC")
+      (return-from get-other-coast "SPA SC")
+         )
+  (if (equal-diplomacy-elements x "SPA SC")
+      (return-from get-other-coast "SPA NC"))
+  (if (equal-diplomacy-elements x "BUL SC")
+      (return-from get-other-coast "BUL EC"))
+
+  (if (equal-diplomacy-elements x "BUL EC")
+       (return-from get-other-coast "BUL SC"))
+
+
+  )
+
+
+(defun set-other-coast-empty (x)
+  (if (not-dip (is-x-a-y? x {subcoast})) (return-from set-other-coast-empty t))
+  (x-is-the-y-of-z "NONE" {occupying great power}  (get-other-coast x))
+
+)
+
 (defun make-move (order)
   "This function completes a valid order."
   (let ((initial-location (nth 2 order))
@@ -680,20 +773,47 @@
                                                     final-location))
       (x-is-the-y-of-z owner-of-unit {occupying great power} final-location)
       (x-is-the-y-of-z {NONE} {occupying great power} initial-location)
+      (x-is-the-y-of-z owner-of-unit {occupying great power} (get-whole-unit final-location))
+      (if (equal type-of-unit "F") (x-is-the-y-of-z
+                                    {fleet} {occupying unit} (get-whole-unit final-location)))
+      (if (equal type-of-unit "A") (x-is-the-y-of-z {army}
+                                                    {occupying unit}
+                                                    (get-whole-unit final-location)))
+      (set-other-coast-empty final-location)
+      (set-other-coast-empty initial-location)
 
-    )
-  )
+      (x-is-the-y-of-z {NONE} {occupying great power} (get-whole-unit initial-location))))
+
 
 (defun best-move (x)
   "This function returns true if a move order to a location is the strongest
    move to that location"
-  (let  ((r 0))
-  (loop for y in *final-move-orders*
-       do (if  (equal (get-final-location x) (get-final-location y))
-           (if (<= (nth 4 x) (nth 4 y))
-             (if (not (equal (get-initial-location x) (get-initial-location y)))
-             (setq r 1)))))
-    (eq r 0)))
+    (loop for y in *final-move-orders*
+         do (if  (equal (get-whole-unit (get-final-location x)) (get-whole-unit(get-final-location y)))
+             (if (<= (nth 4 x) (nth 4 y))
+               (if (not (equal (get-whole-unit (get-initial-location x)) (get-whole-unit(get-initial-location y))))
+               (return-from best-move NIL)))))
+     (return-from best-move t))
+
+
+
+
+
+
+
+
+(defun nc-sc-empty (x)
+  (if (not-dip (is-x-a-y? x {subcoast})) (return-from nc-sc-empty t))
+
+  (let ((y (get-whole-unit x)))
+
+    (if (not (or (equal (the-x-of-y {occupying great power}
+                                                 y) NIL)
+                 (equal-diplomacy-elements (the-x-of-y {occupying great power}
+                                                       y) "NONE")))
+      (return-from nc-sc-empty NIL)))
+  (return-from nc-sc-empty t))
+
 
 
 
@@ -705,22 +825,25 @@
         do(when (best-move x)
             (setf p 0)
             (if (= (nth 4 x) 0)(setf p 1))
+            (write "hereee")
             ;;; final unoccupied
             (if (equal-diplomacy-elements (the-x-of-y {occupying great power}
-                                                      (get-final-location x))
+                                                      (get-whole-unit(get-final-location x)))
                                           NIL) (setf p 0))
             (if (equal-diplomacy-elements (the-x-of-y {occupying great power}
-                                                        (get-final-location x))
+                                                        (get-whole-unit(get-final-location x)))
                                                       {NONE}) (setf p 0))
-
-
-            (loop for y in *hold-orders*
+            (write "okkk")
+            (loop for y in *final-hold-orders*
               do (
                   if (and (equal (get-final-location x) (get-initial-location y))
-                          (>= (nth 4 x) (nth 3 y )))
-                   (setf p 1)))
+                          (<= (nth 4 x) (nth 3 y )))
+                   (setf p 1))
+              )
+            (write "yeP")
              ;;; If the move has more supporters than the hold, or
              ;;; there is no hold, make the move.
+
               (if (eq p 0) (make-move x))))))
 
 (defun get-type-of-unit-ordered (order-line)
@@ -760,7 +883,7 @@
 ;;; (order-input Austria order-line)
 ;;; For now, please use the standard 3 letter names for regions.
 ;;; This will be polished to allow for flexibility in names.
-
+;;; for moves to st pet,Bukgaria, spain specify the coast
 (defun order-input (player order-line)
   "This function takes in a diplomacy order and adds it to
    the set of orders to be resolved."
