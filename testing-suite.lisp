@@ -77,6 +77,8 @@
 (order-input "Germany"  (list "M" "A" "BER" "PRU"))
 (order-input "Russia" (list "M" "A" "WAR" "PRU")) 
 (order-input "Russia" (list "S" "A" "M" "SIL" "WAR" "PRU"))
+
+;;; here onwards doesnt work
 ;;; SET 12
 (order-input "Russia" (list "M" "A" "PRU" "SWE"))
 (order-input "Russia" (list "M" "F" "STP" "BOT"))
@@ -146,3 +148,29 @@
 (order-input "Turkey" (list "S" "A" "M" "BUL" "BLA" "RUM"))
 (order-input "Turkey" (list "M" "F" "BLA" "RUM"))
  (order-input "Austria" (list "M" "A" "SER" "BUL"))
+ 
+;;; coast stuff   
+;;; tests 1             
+;;; set 1
+(order-input "Turkey" (list "M" "F" "ANK" "BLA"))
+(order-input "Austria" (list "M" "A" "BUD" "GAL"))             
+;;; set 2
+(order-input "Turkey" (list "M" "F" "BLA" "SEV"))
+(order-input "Austria" (list "M" "A" "GAL" "UKR"))            
+
+;;; set 3
+(order-input "Austria" (list "M" "A" "UKR" "LVN"))
+;;; set 4
+(order-input "Austria" (list "M" "A" "LVN" "STP NC"))
+;;; set 5
+(order-input "Austria" (list "M" "A" "LVN" "STP SC"))
+;;; set 6
+(order-input "Austria" (list "M" "A" "LVN" "STP SC"))             
+(order-input "Russia" (list "S" "A" "M" "MOS" "LVN" "STP SC"))
+ ;;; set 7            
+(order-input "Austria" (list "M" "A" "STP SC" "LVN"))
+             
+
+             
+             
+             
