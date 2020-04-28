@@ -7,6 +7,8 @@
 (setf *convoy-orders* NIL)
 (setf *final-move-orders* NIL)
 
+(setf *final-hold-orders* NIL)
+
 ;;; nothing happens
 (order-input "France" (list "M" "A" "PAR" "BRE"))
 
@@ -148,7 +150,7 @@
 (order-input "Turkey" (list "S" "A" "M" "BUL" "BLA" "RUM"))
 (order-input "Turkey" (list "M" "F" "BLA" "RUM"))
  (order-input "Austria" (list "M" "A" "SER" "BUL"))
- 
+;;; restart
 ;;; coast stuff   
 ;;; tests 1             
 ;;; set 1
@@ -170,7 +172,18 @@
  ;;; set 7            
 (order-input "Austria" (list "M" "A" "STP SC" "LVN"))
              
-
+;;; set 8
+(order-input "France" (list "M" "A" "PAR" "BUR"))             
+(order-input "Austria" (list "M" "A" "VIE" "TYR"))
+;;; set 9            
+(order-input "Austria" (list  "S" "A" "M" "TYR" "BUR" "MUN"))
+(order-input "France" (list "M" "A" "BUR" "MUN"))
+(order-input "Germany" (list "S" "A" "H" "BER" "MUN"))
+(order-input "Germany" (list "H" "A" "MUN"))
+ ;;; set 10
+ (order-input "Austria" (list  "S" "A" "M" "TYR" "BUR" "MUN"))
+ (order-input "France" (list "M" "A" "BUR" "MUN"))
+ (order-input "Germany" (list "H" "A" "MUN"))            
              
              
              
